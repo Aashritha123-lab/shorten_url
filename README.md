@@ -1,33 +1,35 @@
 ## 📝 URL Shortener API
 
-A simple URL Shortener service built in Go. Generates unique short links for long URLs and persists them in PostgreSQL. Inspired by services like bit.ly
-It allows users to create short URLs for long URLs and redirect users from the short URL to the original URL.
+    A simple URL Shortener service built in Go. Generates unique short links for long URLs and persists them in PostgreSQL. Inspired by services like bit.ly
+    It allows users to create short URLs for long URLs and redirect users from the short URL to the original URL.
 
 ---
 
 ## 📦 Features
 
-Shorten long URLs to a 6-character code.
-
-Redirect from short URL to original URL.
-
-Validate for duplicate URLs and short codes.
-
-Uses PostgreSQL to store URL mappings.
-
-RESTful API endpoints.
+    - Shorten long URLs to a 6-character code.
+    
+    - Redirect from short URL to original URL.
+    
+    - Validate for duplicate URLs and short codes.
+    
+    - Uses PostgreSQL to store URL mappings.
+    
+    - RESTful API endpoints.
 
 ---
 
 ## 📦 Architecture Diagram
 
-Client -> HTTP Server -> PostgreSQL
+    Client -> HTTP Server -> PostgreSQL
+
+---
 
 ## 🛠️ Tech Stack
 
-- Go (net/http, fmt, encoding/json)
-
-- PostgreSQL 15+
+    - Go (net/http, fmt, encoding/json)
+    
+    - PostgreSQL 15+
 
 ---
 
@@ -36,7 +38,9 @@ Client -> HTTP Server -> PostgreSQL
 ### 1. Clone the repository
     git clone https://github.com/Aashritha123-lab/GO_BASICS.git
     cd shorten_url
+
 ---
+
 ### 2. Create PostgreSQL database & table
     CREATE DATABASE url_shortener;
 
@@ -55,13 +59,13 @@ Client -> HTTP Server -> PostgreSQL
 
     dsn := "user=username password=example@123 dbname=dbname sslmode=disable"
 
+    Replace with your PostgreSQL credentials.
 
-Replace with your PostgreSQL credentials.
 ---
+
 ### 4. Run the server
     
     go run main.go
-
 
     Server will start on http://localhost:3051.
 
@@ -105,20 +109,19 @@ Replace with your PostgreSQL credentials.
 
 ## 🔄 URL Shortener Flow Diagram
 
-flowchart TD
-    A[Client: POST /shorten] -->|Send original URL| B[Go Server: ShorthandUrl Handler]
-    B --> C{Validate URL}
-    C -->|URL exists| D[Return 409 Conflict]
-    C -->|URL does not exist| E[Generate short code]
-    E --> F{Check code in DB}
-    F -->|Code exists| E
-    F -->|Code unique| G[Insert short_url into DB]
-    G --> H[Return JSON with short URL]
-    
-    I[Client: GET /{short_code}] -->|Request short URL| J[Go Server: Redirect Handler]
-    J --> K[Check short_code in DB]
-    K -->|Found| L[HTTP Redirect to original URL]
-    K -->|Not found| M[Return 404 Not Found]
+    flowchart TD
+        - A[Client: POST /shorten] -->|Send original URL| B[Go Server: ShorthandUrl Handler]
+        - B --> C{Validate URL}
+        - C -->|URL exists| D[Return 409 Conflict]
+        - C -->|URL does not exist| E[Generate short code]
+        - E --> F{Check code in DB}
+        - F -->|Code exists| E
+        - F -->|Code unique| G[Insert short_url into DB]
+        - G --> H[Return JSON with short URL]
+        - I[Client: GET /{short_code}] -->|Request short URL| J[Go Server: Redirect Handler]
+        - J --> K[Check short_code in DB]
+        - K -->|Found| L[HTTP Redirect to original URL]
+        - K -->|Not found| M[Return 404 Not Found]
 
 ## ⚠️ Notes
 
