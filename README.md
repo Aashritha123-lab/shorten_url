@@ -1,6 +1,6 @@
 ## 📝 URL Shortener API
 
-A simple URL shortening service built with Go and PostgreSQL.
+A simple URL Shortener service built in Go. Generates unique short links for long URLs and persists them in PostgreSQL. Inspired by services like bit.ly
 It allows users to create short URLs for long URLs and redirect users from the short URL to the original URL.
 
 ---
@@ -19,13 +19,15 @@ RESTful API endpoints.
 
 ---
 
-## ⚙️ Prerequisites
+## 📦 Architecture Diagram
 
-Go 1.20+
+Client -> HTTP Server -> PostgreSQL
 
-PostgreSQL 15+
+## 🛠️ Tech Stack
 
-github.com/lib/pq PostgreSQL driver
+- Go (net/http, fmt, encoding/json)
+
+- PostgreSQL 15+
 
 ---
 
@@ -86,6 +88,11 @@ Replace with your PostgreSQL credentials.
             "url": "https://example.com"
         }
     }
+    Example :
+        {
+          "short_url": "http://localhost:8080/WN4GRj",
+          "original_url": "https://example.com/very/long/link"
+        }
 
 ### 2. Redirect Short URL
 
